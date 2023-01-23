@@ -45,6 +45,14 @@ const messageListener = async (m: any, sock: any) => {
         const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
         const emote = { react: { text: "", key: msg.key } }
 
+        //read message
+        const readMsg = {
+            remoteJid: from,
+            id: msgId,
+            participant: undefined
+        }
+        await sock.readMessages([readMsg])
+
         //register user
         if (!isUser && !isGroup) {
             if (isStatus) return
@@ -83,20 +91,20 @@ const messageListener = async (m: any, sock: any) => {
         if (isUser && command.toLowerCase() === "assalamualaikum" ||
             command.toLowerCase() === "assalamu'alaikum"
         ) {
-            await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             emote.react.text = "🙏"
+            await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "hai") {
-            await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             emote.react.text = "👋"
+            await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "p") {
-            await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             emote.react.text = "😡"
+            await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
@@ -105,15 +113,15 @@ const messageListener = async (m: any, sock: any) => {
                 case `${prefix}menu`:
                 case `${prefix}help`:
                 case `${prefix}list`:
-                    menuCommand(msg, sock)
                     emote.react.text = "📖"
+                    await menuCommand(msg, sock)
                     await sock.sendMessage(from, emote)
 
                     break
 
                 case `${prefix}tips`:
-                    await sock.sendMessage(from, { text: getRandomTips() }, { quoted: msg })
                     emote.react.text = "💡"
+                    await sock.sendMessage(from, { text: getRandomTips() }, { quoted: msg })
                     await sock.sendMessage(from, emote)
                     break
 
@@ -121,31 +129,31 @@ const messageListener = async (m: any, sock: any) => {
                 case `${prefix}stiker`:
                 case `${prefix}s`:
                     if (isImage || isQuotedImage) {
-                        img(msg, sock)
                         emote.react.text = "🖼️"
+                        await img(msg, sock)
                         await sock.sendMessage(from, emote)
                     }
                     else if (isVideo || isQuotedVideo) {
-                        video(msg, sock)
                         emote.react.text = "🎞️"
+                        await video(msg, sock)
                         await sock.sendMessage(from, emote)
                     }
                     else {
-                        sock.sendMessage(from, { text: respond.stickerCommand }, { quoted: msg })
                         emote.react.text = "❗"
+                        await sock.sendMessage(from, { text: respond.stickerCommand }, { quoted: msg })
                         await sock.sendMessage(from, emote)
                     }
                     break
 
                 case `${prefix}owner`:
-                    ownerCommand(msg, sock)
                     emote.react.text = "👑"
+                    await ownerCommand(msg, sock)
                     await sock.sendMessage(from, emote)
                     break
 
                 case `${prefix}gpt`:
-                    gptCommand(msg, sock, chats, from)
                     emote.react.text = "🤖"
+                    gptCommand(msg, sock, chats, from)
                     await sock.sendMessage(from, emote)
                     break
 
@@ -154,26 +162,26 @@ const messageListener = async (m: any, sock: any) => {
                 case `${prefix}d`:
                     if (isOwner) {
                         if (isQuotedMsg) {
-                            sock.sendMessage(from, { delete: { remoteJid: from, fromMe: true, id: msg.message.extendedTextMessage.contextInfo.stanzaId } }, { quoted: msg })
                             emote.react.text = "🗑️"
+                            await sock.sendMessage(from, { delete: { remoteJid: from, fromMe: true, id: msg.message.extendedTextMessage.contextInfo.stanzaId } }, { quoted: msg })
                             await sock.sendMessage(from, emote)
                         }
                         else {
-                            sock.sendMessage(from, { text: respond.deleteCommand }, { quoted: msg })
                             emote.react.text = "❗"
+                            await sock.sendMessage(from, { text: respond.deleteCommand }, { quoted: msg })
                             await sock.sendMessage(from, emote)
                         }
                     }
                     else {
-                        sock.sendMessage(from, { text: respond.notOwner }, { quoted: msg })
                         emote.react.text = "🤣"
+                        await sock.sendMessage(from, { text: respond.notOwner }, { quoted: msg })
                         await sock.sendMessage(from, emote)
                     }
                     break
 
                 default:
-                    sock.sendMessage(from, { text: respond.defaultRespond }, { quoted: msg })
                     emote.react.text = "❗"
+                    await sock.sendMessage(from, { text: respond.defaultRespond }, { quoted: msg })
                     await sock.sendMessage(from, emote)
                     break
             }
