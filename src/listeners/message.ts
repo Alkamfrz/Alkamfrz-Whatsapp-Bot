@@ -73,10 +73,10 @@ const messageListener = async (m: any, sock: any) => {
         }
 
         //auto sticker
-        if (isImage && !isGroup && isUser) {
+        if (isImage && !isGroup && isUser && !isCmd) {
             await img(msg, sock)
         }
-        if (isVideo && !isGroup && isUser) {
+        if (isVideo && !isGroup && isUser && !isCmd) {
             await video(msg, sock)
         }
 
