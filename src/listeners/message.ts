@@ -36,6 +36,7 @@ const messageListener = async (m: any, sock: any) => {
         const isCmd = command.startsWith(prefix)
         const isOwner = sender === owner + '@s.whatsapp.net'
         const isUser = sender in userData
+        const isStatus = sender.includes('@broadcast')
         const content = JSON.stringify(msg.message)
         const isImage = (type == 'imageMessage')
         const isVideo = (type == 'videoMessage')
@@ -46,6 +47,7 @@ const messageListener = async (m: any, sock: any) => {
 
         //register user
         if (!isUser && !isGroup) {
+            if (isStatus) return
             userData[sender] = {
                 name: pushname,
                 number: sender.split('@')[0],
@@ -57,6 +59,7 @@ const messageListener = async (m: any, sock: any) => {
         }
 
         if (!isUser && isGroup) {
+            if (isStatus) return
             if (isCmd || isMenu) {
                 userData[sender] = {
                     name: pushname,
