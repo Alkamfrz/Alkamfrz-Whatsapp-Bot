@@ -12,6 +12,7 @@ const menuCommand = async (msg: any, sock: any) => {
             {title: "Menampilkan Menu", rowId: `${prefix}menu`, description: "Menampilkan list command yang tersedia"},
             {title: "Menampilkan Tips", rowId: `${prefix}tips`, description: "Mencari tahu fitur-fitur bot yang mungkin belum kamu ketahui"},
             {title: "Membuat Sticker", rowId: `${prefix}sticker`, description: "Membuat sticker dari gambar, video, atau gif yang kamu kirim"},
+            {title: "Menggunakan ChatGPT OpenAI", rowId: `${prefix}gpt`, description: "Mendapatkan informasi yang kamu inginkan dengan menggunakan ChatGPT"},
             {title: `Berkenalan dengan majikan ${bot}`, rowId: `${prefix}owner`, description: "Silahkan berkenalan dengan majikan saya"},
         ]
         },
