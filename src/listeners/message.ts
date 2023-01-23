@@ -36,7 +36,7 @@ const messageListener = async (m: any, sock: any) => {
         const isCmd = command.startsWith(prefix)
         const isOwner = sender === owner + '@s.whatsapp.net'
         const isUser = sender in userData
-        const isStatus = sender.includes('@broadcast')
+        const isStatus = sender === 'status@broadcast'
         const content = JSON.stringify(msg.message)
         const isImage = (type == 'imageMessage')
         const isVideo = (type == 'videoMessage')
