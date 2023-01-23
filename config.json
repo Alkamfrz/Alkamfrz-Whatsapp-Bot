@@ -1,0 +1,11 @@
+{
+    "botConfig": {
+        "prefix": "/",
+        "botName": "Alkamfrz Bot",
+        "ownerNumber": "6281316882041",
+        "ownerName": "Muhammad Alkam Alfariz"
+    },
+    "apiKey":{
+        "openAIKey": "Enter your apiKey here"
+    }
+}
