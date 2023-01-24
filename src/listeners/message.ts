@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import fs from 'fs'
 
 import gptCommand from '../commands/gpt'
@@ -8,11 +7,19 @@ import ownerCommand from '../commands/owner'
 import { img, video } from '../commands/sticker'
 import getRandomTips from '../commands/tips'
 import config from '../configs/config'
-import regUser from '../utils/register'
 import * as respond from './respond'
 
 const prefix = config.botConfig.prefix
 const owner = config.botConfig.ownerNumber
+
+const userDataPath = './database/userData.json'
+if (!fs.existsSync('./database')) {
+    fs.mkdirSync('./database')
+}
+if (!fs.existsSync(userDataPath))
+    fs.writeFileSync(userDataPath, JSON.stringify({}, null, 2))
+
+const userData = JSON.parse(fs.readFileSync('./database/userData.json').toString())
 
 const messageListener = async (m: any, sock: any) => {
     try {
@@ -28,7 +35,6 @@ const messageListener = async (m: any, sock: any) => {
         const command = chats.toLowerCase().split(' ')[0] || ''
         const isCmd = command.startsWith(prefix)
         const isOwner = sender === owner + '@s.whatsapp.net'
-        const userData = JSON.parse(fs.readFileSync('./database/userData.json').toString())
         const isUser = sender in userData
         const isStatus = sender === 'status@broadcast'
         const content = JSON.stringify(msg.message)
@@ -48,8 +54,30 @@ const messageListener = async (m: any, sock: any) => {
         await sock.readMessages([readMsg])
 
         //register user
-        if (!isUser && !isStatus) {
-            await regUser(msg, sock)
+        if (!isUser && !isGroup) {
+            if (isStatus) return
+            userData[sender] = {
+                name: pushname,
+                number: sender.split('@')[0],
+                owner: isOwner
+            }
+            fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
+            sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+            await menuCommand(msg, sock)
+        }
+
+        if (!isUser && isGroup) {
+            if (isStatus) return
+            if (isCmd || isMenu) {
+                userData[sender] = {
+                    name: pushname,
+                    phoneNumber: sender.split('@')[0],
+                    owner: isOwner
+                }
+                fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
+                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
         }
 
         //auto sticker
@@ -67,27 +95,18 @@ const messageListener = async (m: any, sock: any) => {
         if (isUser && command.toLowerCase() === "assalamualaikum" ||
             command.toLowerCase() === "assalamu'alaikum"
         ) {
-            if (!isUser) {
-                await regUser(msg, sock)
-            }
             emote.react.text = "🙏"
             await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "hai") {
-            if (!isUser) {
-                await regUser(msg, sock)
-            }
             emote.react.text = "👋"
             await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "p") {
-            if (!isUser) {
-                await regUser(msg, sock)
-            }
             emote.react.text = "😡"
             await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             await sock.sendMessage(from, emote)
@@ -138,7 +157,7 @@ const messageListener = async (m: any, sock: any) => {
 
                 case `${prefix}gpt`:
                     emote.react.text = "🤖"
-                    await gptCommand(msg, sock)
+                    await gptCommand(msg, sock, chats, from)
                     await sock.sendMessage(from, emote)
                     break
 
