@@ -6,7 +6,8 @@ import { gptCommand as respond } from "../listeners/respond"
 
 const openAIKey = config.apiKey.openAIKey;
 
-const gptCommand = async (msg: any, sock: any, chats: any, from: any) => {
+const gptCommand = async (msg: any, sock: any) => {
+    const { from, chats, } = msg;
     const configuration = new Configuration({
         apiKey: openAIKey,
       });
