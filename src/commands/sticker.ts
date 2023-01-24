@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { downloadContentFromMessage } from '@adiwajshing/baileys'
 import { Sticker, StickerTypes } from 'wa-sticker-formatter'
 

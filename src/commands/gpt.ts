@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Configuration,OpenAIApi } from "openai";
 
 import config from "../configs/config";

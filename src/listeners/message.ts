@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs'
 
 import gptCommand from '../commands/gpt'
@@ -44,6 +45,12 @@ const messageListener = async (m: any, sock: any) => {
         const isQuotedImage = isQuotedMsg ? content.includes('imageMessage') ? true : false : false
         const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
         const emote = { react: { text: "", key: msg.key } }
+        const readMsg = {
+            remoteJid: from,
+            id: msgId,
+            participant: sender ? sender : undefined
+        }
+        await sock.readMessages([readMsg])
 
         //register user
         if (!isUser && !isGroup) {
