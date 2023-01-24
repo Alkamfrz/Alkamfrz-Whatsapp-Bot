@@ -7,6 +7,7 @@ import ownerCommand from '../commands/owner'
 import { img, video } from '../commands/sticker'
 import getRandomTips from '../commands/tips'
 import config from '../configs/config'
+import regUser from '../utils/register'
 import * as respond from './respond'
 
 const prefix = config.botConfig.prefix
@@ -45,7 +46,7 @@ const messageListener = async (m: any, sock: any) => {
         const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
         const emote = { react: { text: "", key: msg.key } }
 
-        //read message
+        //Auto read message
         const readMsg = {
             remoteJid: from,
             id: msgId,
@@ -53,28 +54,18 @@ const messageListener = async (m: any, sock: any) => {
         }
         await sock.readMessages([readMsg])
 
-        //register user
+        //register user for first time
         if (!isUser && !isGroup) {
             if (isStatus) return
-            userData[sender] = {
-                name: pushname,
-                number: sender.split('@')[0],
-                owner: isOwner
-            }
-            fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
-            sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+            await regUser(msg, sock)
+            await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
             await menuCommand(msg, sock)
         }
 
         if (!isUser && isGroup) {
             if (isStatus) return
             if (isCmd || isMenu) {
-                userData[sender] = {
-                    name: pushname,
-                    phoneNumber: sender.split('@')[0],
-                    owner: isOwner
-                }
-                fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
+                await regUser(msg, sock)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
             }
@@ -92,21 +83,36 @@ const messageListener = async (m: any, sock: any) => {
             await sock.sendMessage(from, emote)
         }
 
-        if (isUser && command.toLowerCase() === "assalamualaikum" ||
+        if (command.toLowerCase() === "assalamualaikum" ||
             command.toLowerCase() === "assalamu'alaikum"
         ) {
+            if (!isUser) {
+                await regUser(msg, sock)
+                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "🙏"
             await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
-        if (isUser && command.toLowerCase() === "hai") {
+        if (command.toLowerCase() === "hai") {
+            if (!isUser) {
+                await regUser(msg, sock)
+                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "👋"
             await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
-        if (isUser && command.toLowerCase() === "p") {
+        if (command.toLowerCase() === "p") {
+            if (!isUser) {
+                await regUser(msg, sock)
+                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "😡"
             await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             await sock.sendMessage(from, emote)
