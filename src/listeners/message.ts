@@ -45,15 +45,19 @@ const messageListener = async (m: any, sock: any) => {
         await sock.readMessages([readMsg])
 
         //register user
-        if (!isUser && !isGroup) {
+        if (!isUser && !isGroup) { //user not registered and not in group
             if (isStatus) return
             await regUser(msg, sock, from, pushname, isOwner, sender)
+            sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+            await menuCommand(msg, sock)
         }
 
-        if (!isUser && isGroup) {
+        if (!isUser && isGroup) { //user not registered and in group
             if (isStatus) return
-            if (isCmd || isMenu) {
+            if (isCmd || isMenu) { //only register user if command or menu is used
                 await regUser(msg, sock, from, pushname, isOwner, sender)
+                sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
             }
         }
 
@@ -65,32 +69,44 @@ const messageListener = async (m: any, sock: any) => {
             await video(msg, sock)
         }
 
+        //auto reply some message
         if (isUser && command.toLowerCase() === "assalamualaikum" ||
             command.toLowerCase() === "assalamu'alaikum"
         ) {
-            if (!isUser)
+            if (!isUser) {
                 await regUser(msg, sock, from, pushname, isOwner, sender)
+                sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "🙏"
             await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "hai") {
-            if (!isUser)
+            if (!isUser) {
                 await regUser(msg, sock, from, pushname, isOwner, sender)
+                sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "👋"
             await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "p") {
-            if (!isUser)
+            if (!isUser) {
                 await regUser(msg, sock, from, pushname, isOwner, sender)
+                sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
+                await menuCommand(msg, sock)
+            }
             emote.react.text = "😡"
             await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             await sock.sendMessage(from, emote)
             return
         }
+
+        //command handler
         if (isUser && isCmd || isMenu) {
             switch (command || isMenu) {
                 case `${prefix}menu`:

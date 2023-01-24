@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs'
 
-import menuCommand from '../commands/menu'
-import * as respond from '../listeners/respond'
-
 const userDataPath = './database/userData.json'
 if (!fs.existsSync('./database')) {
     fs.mkdirSync('./database')
@@ -20,8 +17,6 @@ const regUser = async (msg: any, sock: any, from: any, pushname: any, isOwner: a
         owner: isOwner
     }
     fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
-    sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
-    await menuCommand(msg, sock)
 }
 
 export default regUser
