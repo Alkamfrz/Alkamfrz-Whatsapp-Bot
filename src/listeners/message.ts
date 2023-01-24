@@ -49,7 +49,7 @@ const messageListener = async (m: any, sock: any) => {
         const readMsg = {
             remoteJid: from,
             id: msgId,
-            participant: sender ? sender : undefined
+            participant: isGroup ? sender : undefined
         }
         await sock.readMessages([readMsg])
 
