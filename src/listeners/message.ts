@@ -4,6 +4,7 @@ import fs from 'fs'
 import gptCommand from '../commands/gpt'
 import menuCommand from '../commands/menu'
 import ownerCommand from '../commands/owner'
+import spotifyCommand from '../commands/spotify'
 import { img, video } from '../commands/sticker'
 import getRandomTips from '../commands/tips'
 import config from '../configs/config'
@@ -34,6 +35,7 @@ const messageListener = async (m: any, sock: any) => {
         const isGroup = from.endsWith('@g.us')
         const sender = isGroup ? (msg.key.participant ? msg.key.participant : msg.participant) : from
         const command = chats.toLowerCase().split(' ')[0] || ''
+        const args = chats.trim().split(/ +/).slice(1)
         const isCmd = command.startsWith(prefix)
         const isOwner = sender === owner + '@s.whatsapp.net'
         const isUser = sender in userData
@@ -164,6 +166,18 @@ const messageListener = async (m: any, sock: any) => {
                 case `${prefix}gpt`:
                     emote.react.text = "🤖"
                     await gptCommand(msg, sock, chats, from)
+                    await sock.sendMessage(from, emote)
+                    break
+
+                case `${prefix}spotify`:
+                    if (args.length < 1) {
+                        emote.react.text = "❗"
+                        await sock.sendMessage(from, { text: respond.spotifyCommand }, { quoted: msg })
+                        await sock.sendMessage(from, emote)
+                        break
+                    }
+                    emote.react.text = "🎵"
+                    await spotifyCommand(msg, sock)
                     await sock.sendMessage(from, emote)
                     break
 

@@ -6,6 +6,7 @@
         "ownerName": "Muhammad Alkam Alfariz"
     },
     "apiKey":{
-        "openAIKey": "Enter your openAI key here"
+        "openAIKey": "Enter your openAI key here",
+        "LoLHumanKey": "Enter your LoLHuman key here"
     }
 }

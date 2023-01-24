@@ -15,7 +15,6 @@ Selamat menikmati bot ini!`;
 //salam
 export const salam = `Waalaikumsalam`;
 
-
 //jawab hai
 export const hai = `Hai juga`;
 
@@ -48,6 +47,13 @@ ${prefix}gpt <kalimat>
 
 *Contoh*:
 ${prefix}gpt Perbedaan wibu dan otaku`;
+
+//spotify command
+export const spotifyCommand = `*Penggunaan perintah spotify*:
+${prefix}spotify <link spotify>
+
+*Contoh*:
+${prefix}spotify https://open.spotify.com/track/xxxxxxxxxxxxx`;
 
 //not owner
 export const notOwner = 'Maaf, kamu bukan majikan saya';
