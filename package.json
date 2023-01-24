@@ -1,6 +1,6 @@
 {
   "name": "alkamfrz-whatsapp-bot",
-  "version": "1.0.7",
+  "version": "1.0.6",
   "description": "Simple WhatsApp Bot with Baileys and Typescript (NodeJS) | Alkamfrz",
   "main": "./dist/index.js",
   "scripts": {
