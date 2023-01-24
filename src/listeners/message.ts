@@ -13,10 +13,10 @@ import * as respond from './respond'
 const prefix = config.botConfig.prefix
 const owner = config.botConfig.ownerNumber
 
-const userDataPath = './database/userData.json'
 if (!fs.existsSync('./database')) {
     fs.mkdirSync('./database')
 }
+const userDataPath = './database/userData.json'
 if (!fs.existsSync(userDataPath))
     fs.writeFileSync(userDataPath, JSON.stringify({}, null, 2))
 
