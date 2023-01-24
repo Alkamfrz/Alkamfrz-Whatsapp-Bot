@@ -57,7 +57,7 @@ const messageListener = async (m: any, sock: any) => {
         //register user for first time
         if (!isUser && !isGroup) {
             if (isStatus) return
-            await regUser(msg, sock)
+            await regUser(msg)
             await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
             await menuCommand(msg, sock)
         }
@@ -65,7 +65,7 @@ const messageListener = async (m: any, sock: any) => {
         if (!isUser && isGroup) {
             if (isStatus) return
             if (isCmd || isMenu) {
-                await regUser(msg, sock)
+                await regUser(msg)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
             }
@@ -87,7 +87,7 @@ const messageListener = async (m: any, sock: any) => {
             command.toLowerCase() === "assalamu'alaikum"
         ) {
             if (!isUser) {
-                await regUser(msg, sock)
+                await regUser(msg)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
             }
@@ -98,7 +98,7 @@ const messageListener = async (m: any, sock: any) => {
         }
         if (command.toLowerCase() === "hai") {
             if (!isUser) {
-                await regUser(msg, sock)
+                await regUser(msg)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
             }
@@ -109,7 +109,7 @@ const messageListener = async (m: any, sock: any) => {
         }
         if (command.toLowerCase() === "p") {
             if (!isUser) {
-                await regUser(msg, sock)
+                await regUser(msg)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
             }
