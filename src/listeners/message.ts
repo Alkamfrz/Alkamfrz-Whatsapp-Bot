@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs'
 
 import gptCommand from '../commands/gpt'
@@ -44,18 +45,12 @@ const messageListener = async (m: any, sock: any) => {
         const isQuotedImage = isQuotedMsg ? content.includes('imageMessage') ? true : false : false
         const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
         const emote = { react: { text: "", key: msg.key } }
-        const readMsg = {
-            remoteJid: from,
-            id: msgId,
-            participant: sender ? sender : undefined
-        }
-        await sock.readMessages([readMsg])
 
         //read message
         const readMsg = {
             remoteJid: from,
             id: msgId,
-            participant: undefined
+            participant: sender ? sender : undefined
         }
         await sock.readMessages([readMsg])
 
@@ -105,36 +100,21 @@ const messageListener = async (m: any, sock: any) => {
         if (isUser && command.toLowerCase() === "assalamualaikum" ||
             command.toLowerCase() === "assalamu'alaikum"
         ) {
-<<<<<<< HEAD
-            if (!isUser)
-                await regUser(msg, sock, from, pushname, isOwner, sender)
             emote.react.text = "🙏"
-=======
->>>>>>> e1cde71 (update)
             await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
             emote.react.text = "🙏"
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "hai") {
-<<<<<<< HEAD
-            if (!isUser)
-                await regUser(msg, sock, from, pushname, isOwner, sender)
             emote.react.text = "👋"
-=======
->>>>>>> e1cde71 (update)
             await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
             emote.react.text = "👋"
             await sock.sendMessage(from, emote)
             return
         }
         if (isUser && command.toLowerCase() === "p") {
-<<<<<<< HEAD
-            if (!isUser)
-                await regUser(msg, sock, from, pushname, isOwner, sender)
             emote.react.text = "😡"
-=======
->>>>>>> e1cde71 (update)
             await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })
             emote.react.text = "😡"
             await sock.sendMessage(from, emote)
