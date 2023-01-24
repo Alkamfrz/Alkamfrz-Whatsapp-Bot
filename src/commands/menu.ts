@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import config from "../configs/config"
 
 const prefix = config.botConfig.prefix
