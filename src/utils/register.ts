@@ -13,9 +13,9 @@ const regUser = async (msg: any) => {
     const sender = from.endsWith('@g.us') ? (msg.key.participant ? msg.key.participant : msg.participant) : from
     const isOwner = sender === owner + '@s.whatsapp.net'
     userData[sender] = {
-        name: pushname,
-        number: sender.split('@')[0],
-        owner: isOwner
+        Name: pushname,
+        PhoneNumber: sender.split('@')[0],
+        Owner: isOwner
     }
     fs.writeFileSync(userDataPath, JSON.stringify(userData, null, 2))
 }
