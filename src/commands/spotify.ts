@@ -21,6 +21,7 @@ const spotifyCommand = async (msg: any, sock: any) => {
 *Duration:* ${duration}
 *Popularity:* ${popularity}
 *Download Link:* ${link}`
+    if (res.error) return await sock.sendMessage(from, { text: "Apikey tidak valid atau belum diisi" }, { quoted: msg })
     const thumbnailRes = await axios.get(thumbnail, { responseType: 'arraybuffer' })
     await sock.sendMessage(from, { image: thumbnailRes.data, caption: text }, { quoted: msg })
     const audioRes = await axios.get(link, { responseType: 'arraybuffer' })
