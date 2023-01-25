@@ -62,6 +62,8 @@ const messageListener = async (m: any, sock: any) => {
             await regUser(msg)
             await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
             await menuCommand(msg, sock)
+            //update isUser status
+            userData[sender] = { isUser: true }
         }
 
         if (!isUser && isGroup) {
@@ -90,8 +92,7 @@ const messageListener = async (m: any, sock: any) => {
         ) {
             if (!isUser) {
                 await regUser(msg)
-                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
-                await menuCommand(msg, sock)
+                userData[sender] = { isUser: true }
             }
             emote.react.text = "🙏"
             await sock.sendMessage(from, { text: respond.salam }, { quoted: msg })
@@ -101,8 +102,7 @@ const messageListener = async (m: any, sock: any) => {
         if (command.toLowerCase() === "hai") {
             if (!isUser) {
                 await regUser(msg)
-                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
-                await menuCommand(msg, sock)
+                userData[sender] = { isUser: true }
             }
             emote.react.text = "👋"
             await sock.sendMessage(from, { text: respond.hai + ` ${pushname}!` }, { quoted: msg })
@@ -112,8 +112,7 @@ const messageListener = async (m: any, sock: any) => {
         if (command.toLowerCase() === "p") {
             if (!isUser) {
                 await regUser(msg)
-                await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
-                await menuCommand(msg, sock)
+                userData[sender] = { isUser: true }
             }
             emote.react.text = "😡"
             await sock.sendMessage(from, { text: respond.gakSopan }, { quoted: msg })

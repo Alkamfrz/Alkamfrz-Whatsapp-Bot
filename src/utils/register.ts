@@ -4,9 +4,14 @@ import fs from 'fs'
 import config from '../configs/config'
 
 const owner = config.botConfig.ownerNumber
-const userDataPath = './database/userData.json'
 
 const regUser = async (msg: any) => {
+    if (!fs.existsSync('./database')) {
+        fs.mkdirSync('./database')
+    }
+    const userDataPath = './database/userData.json'
+    if (!fs.existsSync(userDataPath))
+        fs.writeFileSync(userDataPath, JSON.stringify({}, null, 2))
     const userData = JSON.parse(fs.readFileSync('./database/userData.json').toString())
     const from = msg.key.remoteJid
     const pushname = msg.pushName

@@ -4,7 +4,6 @@ import pino from 'pino'
 
 import messageListener from './listeners/message'
 
-
 async function connectToWhatsApp() {
 
     const { state, saveCreds } = await useMultiFileAuthState('auth')

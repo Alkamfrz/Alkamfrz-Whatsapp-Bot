@@ -1,5 +1,5 @@
 {
-  "ignore": ["node_modules", "dist", "auth/*", "database/*"],
+  "ignore": ["database/*", "auth/*"],
   "verbose": true,
   "execMap": {
     "ts": "ts-node"
