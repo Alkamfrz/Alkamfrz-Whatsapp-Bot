@@ -7,6 +7,7 @@ import ownerCommand from '../commands/owner'
 import spotifyCommand from '../commands/spotify'
 import { img, video } from '../commands/sticker'
 import getRandomTips from '../commands/tips'
+import waitCommand from '../commands/wait'
 import config from '../configs/config'
 import regUser from '../utils/register'
 import * as respond from './respond'
@@ -62,7 +63,6 @@ const messageListener = async (m: any, sock: any) => {
             await regUser(msg)
             await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
             await menuCommand(msg, sock)
-            //update isUser status
             userData[sender] = { isUser: true }
         }
 
@@ -72,6 +72,7 @@ const messageListener = async (m: any, sock: any) => {
                 await regUser(msg)
                 await sock.sendMessage(from, { text: respond.welcome(pushname) }, { quoted: msg })
                 await menuCommand(msg, sock)
+                userData[sender] = { isUser: true }
             }
         }
 
@@ -178,6 +179,20 @@ const messageListener = async (m: any, sock: any) => {
                     emote.react.text = "🎵"
                     await spotifyCommand(msg, sock)
                     await sock.sendMessage(from, emote)
+                    break
+
+                case `${prefix}wait`:
+                case `${prefix}whatanime`:
+                    if (isImage || isQuotedImage) {
+                        emote.react.text = "🖼️"
+                        await waitCommand(msg, sock)
+                        await sock.sendMessage(from, emote)
+                    }
+                    else {
+                        emote.react.text = "❗"
+                        await sock.sendMessage(from, { text: 'respond.waitCommand' }, { quoted: msg })
+                        await sock.sendMessage(from, emote)
+                    }
                     break
 
                 case `${prefix}delete`:

@@ -15,6 +15,7 @@ const menuCommand = async (msg: any, sock: any) => {
             {title: "Membuat Sticker", rowId: `${prefix}sticker`, description: "Membuat sticker dari gambar, video, atau gif yang kamu kirim"},
             {title: "Menggunakan ChatGPT OpenAI", rowId: `${prefix}gpt`, description: "Mendapatkan informasi yang kamu inginkan dengan menggunakan ChatGPT"},
             {title: "Spotify Downloader", rowId: `${prefix}spotify`, description: "Mendownload lagu dari Spotify"},
+            {title: "What Anime Is This", rowId: `${prefix}whatanime`, description: "Mencari judul anime dari screenshot"},
             {title: `Berkenalan dengan majikan ${bot}`, rowId: `${prefix}owner`, description: "Silahkan berkenalan dengan majikan saya"},
         ]
         },
