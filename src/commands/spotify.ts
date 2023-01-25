@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import axios from "axios";
-
 import config from "../configs/config";
 
 const apiKey = config.apiKey.LoLHumanKey;
@@ -16,16 +14,23 @@ const spotifyCommand = async (msg: any, sock: any) => {
     const res = await getRes.json()
     const { result } = res
     const { title, artists, duration, popularity, thumbnail, link } = result
-    const text = `*Title:* ${title}
+    const status = res.status
+    const minutes = Math.floor(duration / 60)
+    const seconds = duration - minutes * 60
+    const totalD = `${minutes} minutes ${seconds} seconds`
+    const data = `*Title:* ${title}
 *Artists:* ${artists}
-*Duration:* ${duration}
+*Duration:* ${totalD}
 *Popularity:* ${popularity}
 *Download Link:* ${link}`
-    if (res.error) return await sock.sendMessage(from, { text: "Apikey tidak valid atau belum diisi" }, { quoted: msg })
-    const thumbnailRes = await axios.get(thumbnail, { responseType: 'arraybuffer' })
-    await sock.sendMessage(from, { image: thumbnailRes.data, caption: text }, { quoted: msg })
-    const audioRes = await axios.get(link, { responseType: 'arraybuffer' })
-    await sock.sendMessage(from, { audio: audioRes.data, mimetype: 'audio/mp4' }, { quoted: msg })
+    if (status === 200) {
+        await sock.sendMessage(from, { image: { url: thumbnail }, caption: data }, { quoted: msg }).then(() => {
+            sock.sendMessage(from, { audio: { url: link }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: msg })
+        })
+    }
+    else {
+        sock.sendMessage(from, { text: 'No results found' }, { quoted: msg })
+    }
 }
 
 export default spotifyCommand
