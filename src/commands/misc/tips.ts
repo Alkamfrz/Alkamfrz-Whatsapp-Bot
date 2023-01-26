@@ -1,4 +1,4 @@
-import { config } from "../../../lib/func";
+import { config } from "../../lib/func";
 const prefix = config.botConfig.prefix;
 
 const tipsList = [

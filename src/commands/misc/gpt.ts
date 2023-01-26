@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Configuration, OpenAIApi } from "openai";
 
-import { config } from '../../../lib/func';
+import { config } from '../../lib/func';
 import { gptCommand as respond } from "../../listeners/respond";
 
 const openAIKey = config.apiKey.openAIKey;

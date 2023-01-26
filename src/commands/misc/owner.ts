@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { config } from '../../../lib/func';
+import { config } from '../../lib/func';
 
 const ownerNumber = config.botConfig.ownerNumber;
 const ownerName = config.botConfig.ownerName;

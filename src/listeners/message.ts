@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs';
 
-import { config } from '../../lib/func';
 import waitCommand from '../commands/anime/wait';
 import spotifyCommand from '../commands/downloader/spotify';
 import mainMenu from '../commands/mainMenu';
@@ -9,6 +8,7 @@ import gptCommand from '../commands/misc/gpt';
 import ownerCommand from '../commands/misc/owner';
 import { img, video } from '../commands/misc/sticker';
 import getRandomTips from '../commands/misc/tips';
+import { config } from '../lib/func';
 import regUser from '../utils/register';
 import ansChat from './ansChat';
 import * as respond from './respond';

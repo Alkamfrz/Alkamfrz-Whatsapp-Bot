@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { appVersion, config, getCurrentTime, getUptime } from '../../lib/func';
+import { appVersion, config, getCurrentTime, getUptime } from '../lib/func';
 
 const prefix = config.botConfig.prefix;
 

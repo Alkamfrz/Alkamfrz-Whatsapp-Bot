@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs';
 
-import { config } from '../../lib/func';
+import { config } from '../lib/func';
 
 const owner = config.botConfig.ownerNumber;
 
