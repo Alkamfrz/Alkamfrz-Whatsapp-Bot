@@ -19,6 +19,5 @@ export const getUptime = () => {
 
 //get current time in id (Indonesia)
 export const getCurrentTime = () => {
-    moment.locale('id');
-    return moment().format('MMMM Do YYYY, h:mm:ss a');
+    return moment().locale('id').format('LLLL');
 };
