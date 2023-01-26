@@ -1,4 +1,5 @@
 import fs, { readFileSync } from 'fs';
+import moment from 'moment';
 
 //get bot config
 export const config = JSON.parse(readFileSync('./config.json', 'utf8'));
@@ -16,19 +17,8 @@ export const getUptime = () => {
     return `${days} hari, ${hours} jam, ${minutes} menit, ${seconds} detik`;
 };
 
-//get current time (gmt+7)
+//get current time in id (Indonesia)
 export const getCurrentTime = () => {
-    const date = new Date();
-    const day = date.getDay();
-    const dayList = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const dayName = dayList[day];
-    const dateNumber = date.getDate();
-    const month = date.getMonth();
-    const monthList = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const monthName = monthList[month];
-    const year = date.getFullYear();
-    const hour = (date.getHours() + 7).toString().padStart(2, '0');
-    const minute = date.getMinutes().toString().padStart(2, '0');
-    const second = date.getSeconds().toString().padStart(2, '0');
-    return `${dayName}, ${dateNumber} ${monthName} ${year} ${hour}:${minute}:${second}`;
+    moment.locale('id');
+    return moment().format('MMMM Do YYYY, h:mm:ss a');
 };
