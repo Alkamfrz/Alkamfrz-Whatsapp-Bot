@@ -16,7 +16,7 @@ export const getUptime = () => {
     return `${days} hari, ${hours} jam, ${minutes} menit, ${seconds} detik`;
 };
 
-//get current time
+//get current time (gmt+7)
 export const getCurrentTime = () => {
     const date = new Date();
     const day = date.getDay();
@@ -27,7 +27,7 @@ export const getCurrentTime = () => {
     const monthList = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     const monthName = monthList[month];
     const year = date.getFullYear();
-    const hour = date.getHours().toString().padStart(2, '0');
+    const hour = (date.getHours() + 7).toString().padStart(2, '0');
     const minute = date.getMinutes().toString().padStart(2, '0');
     const second = date.getSeconds().toString().padStart(2, '0');
     return `${dayName}, ${dateNumber} ${monthName} ${year} ${hour}:${minute}:${second}`;
