@@ -1,3 +1,5 @@
+import 'moment-timezone';
+
 import fs, { readFileSync } from 'fs';
 import moment from 'moment';
 
@@ -19,5 +21,6 @@ export const getUptime = () => {
 
 //get current time in id (Indonesia)
 export const getCurrentTime = () => {
-    return moment().locale('id').format('LLLL');
-};
+    moment.locale('id');
+    return moment().tz('Asia/Jakarta').format('LLLL');
+}
