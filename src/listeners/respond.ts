@@ -1,4 +1,4 @@
-import config from '../configs/config';
+import { config } from '../../lib/func';
 
 const prefix = config.botConfig.prefix;
 
@@ -19,7 +19,7 @@ export const salam = `Waalaikumsalam`;
 export const hai = `Hai juga`;
 
 //gak sopan
-export const gakSopan =`Ciri-ciri orang yang ngajak ngobrol tapi gak sopan:
+export const gakSopan = `Ciri-ciri orang yang ngajak ngobrol tapi gak sopan:
 1. Tidak mengucapkan salam
 2. Tidak memperkenalkan diri
 3. Memulai percakapan dengan mengetik "P"`;
@@ -54,6 +54,10 @@ ${prefix}spotify <link spotify>
 
 *Contoh*:
 ${prefix}spotify https://open.spotify.com/track/xxxxxxxxxxxxx`;
+
+//wait command
+export const waitCommand = `*Penggunaan perintah What Anime Is This*:
+${prefix}wait <gambar>`;
 
 //not owner
 export const notOwner = 'Maaf, kamu bukan majikan saya';
