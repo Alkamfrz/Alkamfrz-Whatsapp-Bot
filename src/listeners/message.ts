@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs';
 
+import animeSearchCommand from '../commands/anime/animeSearch';
 import waitCommand from '../commands/anime/wait';
 import spotifyCommand from '../commands/downloader/spotify';
 import mainMenu from '../commands/mainMenu';
@@ -151,6 +152,19 @@ const messageListener = async (m: any, sock: any) => {
                         await sock.sendMessage(from, { text: respond.waitCommand }, { quoted: msg });
                         await sock.sendMessage(from, emote);
                     }
+                    break;
+
+                case `${prefix}anime`:
+                case `${prefix}animesearch`:
+                    if (args.length < 1) {
+                        emote.react.text = "❗";
+                        await sock.sendMessage(from, { text: respond.animeSearchCommand }, { quoted: msg });
+                        await sock.sendMessage(from, emote);
+                        break
+                    }
+                    emote.react.text = "🔎";
+                    await animeSearchCommand(msg, sock);
+                    await sock.sendMessage(from, emote);
                     break;
 
                 case `${prefix}delete`:

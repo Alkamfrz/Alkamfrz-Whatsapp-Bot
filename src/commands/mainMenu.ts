@@ -3,12 +3,14 @@
 import { appVersion, config, getCurrentTime, getUptime } from '../lib/func';
 
 const prefix = config.botConfig.prefix;
+const owner = config.botConfig.ownerName;
 
 const menuAnime = async (msg: any, sock: any) => {
     const sections = [
         {
             title: "Menu Anime",
             rows: [
+                { title: "Cari Anime", rowId: `${prefix}anime`, description: "Mencari deskripsi anime dari judul" }, 
                 { title: "What Anime Is This", rowId: `${prefix}whatanime`, description: "Mencari judul anime dari screenshot scene anime" },
             ]
         },
@@ -23,12 +25,12 @@ const menuAnime = async (msg: any, sock: any) => {
             rows: [
                 { title: "Stiker", rowId: `${prefix}sticker`, description: "Merubah gambar, gif, dan video menjadi stiker" },
                 { title: "ChatGPT", rowId: `${prefix}gpt`, description: "Mencari informasi apa saja menggunakan chatbot GPT-3" },
-                { title: "Tips", rowId: `${prefix}tips`, description: "Mendapatkan tips random yang mungkin dapat berguna dalam menggunakan bot ini" },
+                { title: "Tips", rowId: `${prefix}tips`, description: "Mendapatkan tips random yang mungkin dapat berguna dalam menggunakan bot" },
                 { title: "Owner", rowId: `${prefix}owner`, description: "Berkenalan dengan pencipta serta majikan bot" },
             ]
         },
         {
-            title: "Menu Owner",
+            title: `Menu Owner (Only obey ${owner})`,
             rows: [
                 { title: "Hapus Pesan", rowId: `${prefix}delete`, description: "Menghapus pesan dari bot" },
             ]

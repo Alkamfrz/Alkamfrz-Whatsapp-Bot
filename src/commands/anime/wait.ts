@@ -22,7 +22,7 @@ const waitCommand = async (msg: any, sock: any) => {
     const similarityFormatted = (similarity * 100).toFixed(0) + '%';
     const data = `*Title:* ${title}\n*Episode:* ${episode}\n*From:* ${fromAnimeFormatted}\n*To:* ${toFormatted}\n*Similarity:* ${similarityFormatted}`;
     await sock.sendMessage(from, { image: { url: thumbnail }, caption: data }, { quoted: msg }).then(() => {
-        sock.sendMessage(from, { video: { url: video }, mimetype: 'video/mp4', fileName: `${title}.mp4` }, { quoted: msg });
+        sock.sendMessage(from, { video: { url: video }, }, { quoted: msg });
     });
 };
 

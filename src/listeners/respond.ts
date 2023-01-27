@@ -59,6 +59,13 @@ ${prefix}spotify https://open.spotify.com/track/xxxxxxxxxxxxx`;
 export const waitCommand = `*Penggunaan perintah What Anime Is This*:
 ${prefix}wait <gambar>`;
 
+//anime search command
+export const animeSearchCommand = `*Penggunaan perintah anime search*:
+${prefix}anime <judul anime>
+
+*Contoh*:
+${prefix}anime Lycoris Recoil`;
+
 //not owner
 export const notOwner = 'Maaf, kamu bukan majikan saya';
 

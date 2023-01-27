@@ -12,6 +12,7 @@ async function connectToWhatsApp() {
         auth: state,
         logger: pino({ level: 'fatal' }),
         browser: ["Alkamfrz Bot", "MacOS", "3.0"],
+        generateHighQualityLinkPreview: true,
         patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
                 message.buttonsMessage ||
