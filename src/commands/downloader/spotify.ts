@@ -18,7 +18,7 @@ const spotifyCommand = async (msg: any, sock: any) => {
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
     const totalD = `${minutes} minutes ${seconds} seconds`;
-    const data = `*Title:* ${title};
+    const data = `*Title:* ${title}
 *Artists:* ${artists}
 *Duration:* ${totalD}
 *Popularity:* ${popularity}
