@@ -13,8 +13,7 @@ const spotifyCommand = async (msg: any, sock: any) => {
     const getRes = await fetch(`https://api.lolhuman.xyz/api/spotify?apikey=${apiKey}&url=${url}`);
     const res = await getRes.json();
     const { result } = res;
-    const { title, artists, duration, popularity, thumbnail, link } = result;
-    const status = res.status;
+    const { title, artists, duration, popularity, thumbnail, link, status } = result;
     const minutes = Math.floor(duration / 60);
     const seconds = duration - minutes * 60;
     const totalD = `${minutes} minutes ${seconds} seconds`;
