@@ -21,7 +21,6 @@ const toPDFCommand = async (msg: any, sock: any) => {
     });
     const res = await getRes.json();
     const { data: { url: fileUrl } } = res;
-    console.log(res);
     const fileUrl2 = fileUrl.replace('https://tmpfiles.org/', 'https://tmpfiles.org/dl/');
     const getRes2 = await fetch(`https://api.lolhuman.xyz/api/convert2pdf?apikey=${apiKey}&filename=AlkamfrzBot.jpg&file=${fileUrl2}`, {
         method: 'GET',
@@ -29,7 +28,6 @@ const toPDFCommand = async (msg: any, sock: any) => {
     const res2 = await getRes2.json();
     const { result: pdfUrl } = res2;
     await sock.sendMessage(from, { document: { url: pdfUrl }, mimetype: 'application/pdf', fileName: 'AlkamfrzBot.pdf' }, { quoted: msg });
-    console.log(pdfUrl);
 };
 
 export default toPDFCommand
