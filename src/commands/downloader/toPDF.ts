@@ -27,7 +27,7 @@ const toPDFCommand = async (msg: any, sock: any) => {
     });
     const res2 = await getRes2.json();
     const { result: pdfUrl } = res2;
-    await sock.sendMessage(from, { document: { url: pdfUrl }, mimetype: 'application/pdf', fileName: 'AlkamfrzBot.pdf' }, { quoted: msg });
+    await sock.sendMessage(from, { document: { url: pdfUrl }, mimetype: 'application/pdf', filename: 'AlkamfrzBot.pdf' }, { quoted: msg });
 };
 
 export default toPDFCommand
