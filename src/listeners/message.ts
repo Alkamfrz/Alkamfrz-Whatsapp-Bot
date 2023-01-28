@@ -4,6 +4,7 @@ import fs from 'fs';
 import animeSearchCommand from '../commands/anime/animeSearch';
 import waitCommand from '../commands/anime/wait';
 import spotifyCommand from '../commands/downloader/spotify';
+import toPDFCommand from '../commands/downloader/toPDF';
 import mainMenu from '../commands/mainMenu';
 import gptCommand from '../commands/misc/gpt';
 import ownerCommand from '../commands/misc/owner';
@@ -185,6 +186,19 @@ const messageListener = async (m: any, sock: any) => {
                     else {
                         emote.react.text = "🤡";
                         await sock.sendMessage(from, { text: respond.notOwner }, { quoted: msg });
+                        await sock.sendMessage(from, emote);
+                    }
+                    break;
+
+                case `${prefix}topdf`:
+                    if (isImage || isQuotedImage) {
+                        emote.react.text = "🖼️";
+                        await toPDFCommand(msg, sock);
+                        await sock.sendMessage(from, emote);
+                    }
+                    else {
+                        emote.react.text = "❗"
+                        await sock.sendMessage(from, { text: respond.toPDFCommand }, { quoted: msg });
                         await sock.sendMessage(from, emote);
                     }
                     break;

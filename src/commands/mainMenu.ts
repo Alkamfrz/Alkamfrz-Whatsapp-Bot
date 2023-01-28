@@ -18,6 +18,7 @@ const menuAnime = async (msg: any, sock: any) => {
             title: "Menu Downloader",
             rows: [
                 { title: "Spotify Downloader", rowId: `${prefix}spotify`, description: "Mendownload lagu dari spotify menggunakan link" },
+                { title: "Convert Image to PDF", rowId: `${prefix}topdf`, description: "Konversi gambar menjadi PDF" },
             ]
         },
         {
