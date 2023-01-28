@@ -10,7 +10,7 @@ const menuAnime = async (msg: any, sock: any) => {
         {
             title: "Menu Anime",
             rows: [
-                { title: "Cari Anime", rowId: `${prefix}anime`, description: "Mencari deskripsi anime dari judul" }, 
+                { title: "Cari Anime", rowId: `${prefix}anime`, description: "Mencari deskripsi anime dari judul yang diberikan" }, 
                 { title: "What Anime Is This", rowId: `${prefix}whatanime`, description: "Mencari judul anime dari screenshot scene anime" },
             ]
         },

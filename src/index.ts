@@ -1,5 +1,6 @@
 import makeWASocket, { DisconnectReason, useMultiFileAuthState } from '@adiwajshing/baileys'
 import { Boom } from '@hapi/boom'
+import NodeCache from 'node-cache'
 import pino from 'pino'
 
 import messageListener from './listeners/message'
@@ -13,6 +14,15 @@ async function connectToWhatsApp() {
         logger: pino({ level: 'fatal' }),
         browser: ["Alkamfrz Bot", "MacOS", "3.0"],
         generateHighQualityLinkPreview: true,
+        mediaCache: new NodeCache({
+            stdTTL: 60 * 5,
+            useClones: false
+        }),
+        syncFullHistory: false,
+        userDevicesCache: new NodeCache({
+            stdTTL: 60 * 10,
+            useClones: false
+        }),
         patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
                 message.buttonsMessage ||

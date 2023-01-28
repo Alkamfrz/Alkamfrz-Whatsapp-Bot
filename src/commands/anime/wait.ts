@@ -15,7 +15,7 @@ const waitCommand = async (msg: any, sock: any) => {
     })
     const res = await getRes.json();
     const { filename, episode, from: fromAnime, to, similarity, image: thumbnail, video } = res.result[0];
-    if (similarity < 0.89) return sock.sendMessage(from, { text: 'Tidak ada hasil yang cocok\n\n*Tips:* Berikan screenshot full scene anime tanpa crop dan efek filter' }, { quoted: msg });
+    if (similarity < 0.89) return sock.sendMessage(from, { text: 'Tidak ada hasil yang cocok\n\n*Tips:* Berikan screenshot full scene anime tanpa efek filter' }, { quoted: msg });
     const title = filename.replace('[Ohys-Raws] ', '').replace(/ - \d\d \(.+\)/, '').replace(/\.\w+$/, '');
     const fromAnimeFormatted = new Date(fromAnime * 1000).toISOString().substr(11, 8);
     const toFormatted = new Date(to * 1000).toISOString().substr(11, 8);
