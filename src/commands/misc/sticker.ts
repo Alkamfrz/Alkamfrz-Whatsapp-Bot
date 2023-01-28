@@ -28,7 +28,7 @@ export const video = async (msg: any, sock: any) => {
         pack: 'Curry Ayam',
         author: 'Alkamfrz Bot',
         type: StickerTypes.FULL,
-        quality: 85,
+        quality: 50,
     });
     await sock.sendMessage(from, await sticker.toMessage());
 };
