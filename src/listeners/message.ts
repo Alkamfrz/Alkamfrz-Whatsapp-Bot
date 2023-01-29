@@ -5,6 +5,7 @@ import animeSearchCommand from '../commands/anime/animeSearch';
 import waitCommand from '../commands/anime/wait';
 import spotifyCommand from '../commands/downloader/spotify';
 import toPDFCommand from '../commands/downloader/toPDF';
+import ytmp3Command from '../commands/downloader/ytmp3';
 import mainMenu from '../commands/mainMenu';
 import gptCommand from '../commands/misc/gpt';
 import ownerCommand from '../commands/misc/owner';
@@ -138,6 +139,18 @@ const messageListener = async (m: any, sock: any) => {
                     }
                     emote.react.text = "🎵"
                     await spotifyCommand(msg, sock);
+                    await sock.sendMessage(from, emote);
+                    break
+
+                case `${prefix}ytmp3`:
+                    if (args.length < 1) {
+                        emote.react.text = "❗";
+                        await sock.sendMessage(from, { text: respond.ytmp3Command }, { quoted: msg });
+                        await sock.sendMessage(from, emote);
+                        break
+                    }
+                    emote.react.text = "🎵"
+                    await ytmp3Command(msg, sock);
                     await sock.sendMessage(from, emote);
                     break
 

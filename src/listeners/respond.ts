@@ -55,6 +55,13 @@ ${prefix}spotify <link spotify>
 *Contoh*:
 ${prefix}spotify https://open.spotify.com/track/xxxxxxxxxxxxx`;
 
+//Youtube to mp3 command
+export const ytmp3Command = `*Penggunaan perintah Youtube to mp3*:
+${prefix}ytmp3 <link youtube>
+
+*Contoh*:
+${prefix}ytmp3 https://youtu.be/xxxxxxxxxxxxx`;
+
 //wait command
 export const waitCommand = `*Penggunaan perintah What Anime Is This*:
 ${prefix}wait <gambar>`;
