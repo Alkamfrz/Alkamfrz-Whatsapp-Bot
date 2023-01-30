@@ -73,10 +73,6 @@ ${prefix}anime <judul anime>
 *Contoh*:
 ${prefix}anime Lycoris Recoil`;
 
-//to PDF command
-export const toPDFCommand = `*Penggunaan perintah to PDF*:
-${prefix}toPDF <gambar>`;
-
 //not owner
 export const notOwner = 'Maaf, kamu bukan majikan saya';
 
