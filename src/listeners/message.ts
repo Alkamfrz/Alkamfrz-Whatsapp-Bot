@@ -5,9 +5,11 @@ import animeSearchCommand from '../commands/anime/animeSearch';
 import waitCommand from '../commands/anime/wait';
 import spotifyCommand from '../commands/downloader/spotify';
 import ytmp3Command from '../commands/downloader/ytmp3';
+import ytsrcCommand from '../commands/downloader/ytsrc';
 import mainMenu from '../commands/mainMenu';
 import gptCommand from '../commands/misc/gpt';
 import ownerCommand from '../commands/misc/owner';
+import pinterestCommand from '../commands/misc/pinterest';
 import { img, video } from '../commands/misc/sticker';
 import getRandomTips from '../commands/misc/tips';
 import { config } from '../lib/func';
@@ -150,6 +152,31 @@ const messageListener = async (m: any, sock: any) => {
                     }
                     emote.react.text = "🎵"
                     await ytmp3Command(msg, sock);
+                    await sock.sendMessage(from, emote);
+                    break
+
+                case `${prefix}pinterest`:
+                    case `${prefix}pint`:
+                    if (args.length < 1) {
+                        emote.react.text = "❗";
+                        await sock.sendMessage(from, { text: respond.pinterestCommand }, { quoted: msg });
+                        await sock.sendMessage(from, emote);
+                        break
+                    }
+                    emote.react.text = "🖼️"
+                    await pinterestCommand(msg, sock);
+                    await sock.sendMessage(from, emote);
+                    break
+
+                case `${prefix}ytsrc`:
+                    if (args.length < 1) {
+                        emote.react.text = "❗";
+                        await sock.sendMessage(from, { text: respond.ytsrcCommand }, { quoted: msg });
+                        await sock.sendMessage(from, emote);
+                        break
+                    }
+                    emote.react.text = "🎬"
+                    await ytsrcCommand(msg, sock);
                     await sock.sendMessage(from, emote);
                     break
 

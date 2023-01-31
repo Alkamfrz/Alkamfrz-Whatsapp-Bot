@@ -19,6 +19,7 @@ const menuAnime = async (msg: any, sock: any) => {
             rows: [
                 { title: "Spotify Downloader", rowId: `${prefix}spotify`, description: "Mendownload lagu dari spotify menggunakan link" },
                 { title: "Youtube to Mp3", rowId: `${prefix}ytmp3`, description: "Konversi video youtube menjadi audio mp3" },
+                { title: "Youtube Search", rowId: `${prefix}ytsrc`, description: "Mencari video youtube menggunakan keyword" },
             ]
         },
         {
@@ -26,8 +27,9 @@ const menuAnime = async (msg: any, sock: any) => {
             rows: [
                 { title: "Stiker", rowId: `${prefix}sticker`, description: "Merubah gambar, gif, dan video menjadi stiker" },
                 { title: "ChatGPT", rowId: `${prefix}gpt`, description: "Mencari informasi apa saja menggunakan chatbot GPT-3" },
+                { title: "Pinterest", rowId: `${prefix}pinterest`, description: "Mencari gambar dari pinterest menggunakan keyword" },
                 { title: "Tips", rowId: `${prefix}tips`, description: "Mendapatkan tips random yang mungkin dapat berguna dalam menggunakan bot" },
-                { title: "Owner", rowId: `${prefix}owner`, description: "Berkenalan dengan pencipta serta majikan bot" },
+                { title: "Owner", rowId: `${prefix}owner`, description: "Menghubungi pencipta serta majikan bot" },
             ]
         },
         {

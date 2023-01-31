@@ -38,7 +38,7 @@ const sizeMB = size.split(' ')[0];
         }
     }
     else {
-        sock.sendMessage(from, { text: 'Terjadi kesalahan.' }, { quoted: msg })
+        await sock.sendMessage(from, { text: 'Terjadi kesalahan.' }, { quoted: msg })
     }
 };
 

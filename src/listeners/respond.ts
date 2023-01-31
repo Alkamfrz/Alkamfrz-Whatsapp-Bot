@@ -73,6 +73,20 @@ ${prefix}anime <judul anime>
 *Contoh*:
 ${prefix}anime Lycoris Recoil`;
 
+//pinterest command
+export const pinterestCommand = `*Penggunaan perintah pinterest*:
+${prefix}pinterest <query>
+
+*Contoh*:
+${prefix}pinterest wallpaper HD`;
+
+//youtube search command
+export const ytsrcCommand = `*Penggunaan perintah youtube search*:
+${prefix}youtube <query> <jumlah>
+
+*Contoh*:
+${prefix}youtube Kobo Kanaeru 5`;
+
 //not owner
 export const notOwner = 'Maaf, kamu bukan majikan saya';
 
