@@ -25,9 +25,9 @@ async function connectToWhatsApp() {
         }),
         patchMessageBeforeSending: (message) => {
             const requiresPatch = !!(
-                message.buttonsMessage ||
-                // || message.templateMessage
-                message.listMessage
+                message.buttonsMessage
+                || message.templateMessage
+                || message.listMessage
             );
             if (requiresPatch) {
                 message = {
